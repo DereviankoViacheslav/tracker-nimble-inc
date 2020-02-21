@@ -9,8 +9,7 @@ module.exports = (env, argv) => {
     entry: "./src/index.jsx",
     output: {
       path: __dirname + '/build',
-      filename: "bundle.js",
-      publicPath:'/'
+      filename: "bundle.js"
     },
     module: {
       rules: [
@@ -41,8 +40,7 @@ module.exports = (env, argv) => {
       extensions: [".js", ".jsx"]
     },
     devServer: {
-      hot: true,
-      historyApiFallback:true
+      hot: true
     }
   };
 
