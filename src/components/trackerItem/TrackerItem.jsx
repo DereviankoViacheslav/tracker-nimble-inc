@@ -21,6 +21,7 @@ function TrackerItem(props) {
   const icon = props.isActive
     ? <i className="material-icons">pause_circle_outline</i>
     : <i className="material-icons">play_circle_outline</i>;
+
   const classActive = props.isActive ? ' tracker__item_active' : '';
 
   return (

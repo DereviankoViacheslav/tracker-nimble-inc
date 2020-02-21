@@ -14,17 +14,10 @@ function TrackerList() {
 
   const trackers = trackerList
     .sort((a, b) => b.creationDate - a.creationDate)
-    .map((tracker) => {
-      return <TrackerItem
-        key={tracker.id}
-        {...tracker}
-      />
-    });
+    .map((tracker) => <TrackerItem key={tracker.id} {...tracker} />);
 
   return (
-    <ul className="tracker__list">
-      {trackers}
-    </ul>
+    <ul className="tracker__list">{trackers}</ul>
   );
 }
 
