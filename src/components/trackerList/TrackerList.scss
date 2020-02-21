@@ -1,0 +1,15 @@
+@import '../../styles/breakpoints.scss';
+
+.tracker {
+
+  &__list {
+    margin-top: 30px;
+    font-size: 14px;
+    list-style-type: none;
+
+    @include for-medium-up {
+      font-size: 16px;
+      font-weight: 700;
+    }
+  }
+}

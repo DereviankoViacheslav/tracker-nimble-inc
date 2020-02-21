@@ -1,0 +1,52 @@
+@import '../../styles/breakpoints.scss';
+
+.tracker {
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10px;
+    border-top: 1px solid #e6e6e6;
+    list-style-type: none;
+    
+    &:last-child {
+      border-bottom: 1px solid #e6e6e6;
+    }
+  }
+
+  &__item_active {
+    color: #3faf6c;
+    background-color: #f5f5ef;
+  }
+
+  &__item-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__item-controler {
+    white-space: nowrap;
+  }
+
+  &__item-time {
+    margin: 10px;
+    font-size: 12px;
+    font-weight: 700;
+
+    @include for-medium-up {
+      font-size: 16px;
+    }
+  }
+
+  &__item-btn {
+    height: 30px;
+    width: 30px;
+    margin-left: 15px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    background-color: #fff;
+    outline: none;
+  }
+}
