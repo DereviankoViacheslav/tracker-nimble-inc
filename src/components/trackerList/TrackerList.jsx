@@ -14,7 +14,12 @@ function TrackerList() {
 
   const trackers = trackerList
     .sort((a, b) => b.creationDate - a.creationDate)
-    .map((tracker) => <TrackerItem key={tracker.id} {...tracker} />);
+    .map((tracker) => {
+      const trackerClone = { ...tracker, duration: tracker.duration.clone() }
+      return (
+        <TrackerItem key={tracker.id} {...trackerClone} />
+      );
+    });
 
   return (
     <ul className="tracker__list">{trackers}</ul>

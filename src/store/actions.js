@@ -2,7 +2,7 @@ import moment from 'moment';
 
 export const ADD_TRACKER = 'ADD_TRACKER';
 export const DELETE_TRACKER = 'DELETE_TRACKER';
-export const TOGGLE_TRACKER_STATUS = 'TOGGLE_TRACKER_STATUS';
+export const CHANGE_TRACKER_STATUS = 'CHANGE_TRACKER_STATUS';
 
 export function addTracker(name, trackerNumber) {
   return {
@@ -25,9 +25,9 @@ export function deleteTracker(trackerId) {
   };
 };
 
-export function toggleTrackerStatus(trackerId) {
+export function changeTrackerStatus(trackerId, isActive, duration) {
   return {
-    type: TOGGLE_TRACKER_STATUS,
-    payload: trackerId
+    type: CHANGE_TRACKER_STATUS,
+    payload: { trackerId, isActive, duration }
   };
 };
