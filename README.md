@@ -1,5 +1,5 @@
 
-# [Tracker](https://dereviankoviacheslav.github.io/tracker-nimble-inc/dist/)
+# [Tracker](https://dereviankoviacheslav.github.io/tracker-nimble-inc/dist/index.html)
 
 ### QUICK START
 In the project directory, you can run:
