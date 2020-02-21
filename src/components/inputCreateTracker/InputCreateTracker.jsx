@@ -45,7 +45,9 @@ function InputCreateTracker() {
         onChange={(event) => setValue(event.target.value)}
         value={value}
       />
-      <button className="tracker__creater-btn"><i className="fas fa-play" /></button>
+      <button className="tracker__creater-btn">
+        <i className="material-icons">play_arrow</i>
+      </button>
     </form>
   );
 }

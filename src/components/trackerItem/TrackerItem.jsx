@@ -18,7 +18,9 @@ function getTimeToString(duration) {
 
 function TrackerItem(props) {
 
-  const icon = props.isActive ? <i className="fas fa-pause" /> : <i className="fas fa-play" />;
+  const icon = props.isActive
+    ? <i className="material-icons">pause_circle_outline</i>
+    : <i className="material-icons">play_circle_outline</i>;
   const classActive = props.isActive ? ' tracker__item_active' : '';
 
   return (
@@ -36,7 +38,7 @@ function TrackerItem(props) {
           className="tracker__item-btn"
           onClick={() => store.dispatch(deleteTracker(props.id))}
         >
-          <i className="fas fa-minus" />
+          <i className="material-icons">remove_circle_outline</i>
         </button>
       </div>
     </li>
