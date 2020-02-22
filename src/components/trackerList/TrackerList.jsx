@@ -1,24 +1,14 @@
 import './TrackerList.scss';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import TrackerItem from '../trackerItem';
-import store from '../../store';
 
-function TrackerList() {
-  const [trackerList, setTrackerList] = useState(store.getState().trackerList);
-
-  useEffect(() => {
-    store.subscribe(() => {
-      setTrackerList(store.getState().trackerList);
-    });
-  });
-
-  const trackers = trackerList
+function TrackerList(props) {
+  const trackers = props.trackerList
     .sort((a, b) => b.creationDate - a.creationDate)
     .map((tracker) => {
       const trackerClone = { ...tracker, duration: tracker.duration.clone() }
-      return (
-        <TrackerItem key={tracker.id} {...trackerClone} />
-      );
+      return <TrackerItem key={tracker.id} {...trackerClone} />;
     });
 
   return (
@@ -26,4 +16,10 @@ function TrackerList() {
   );
 }
 
-export default TrackerList;
+function mapState(state) {
+  return {
+    trackerList: state.trackerList
+  };
+}
+
+export default connect(mapState)(TrackerList);

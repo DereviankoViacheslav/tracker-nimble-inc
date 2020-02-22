@@ -1,40 +1,9 @@
 import { ADD_TRACKER, DELETE_TRACKER, CHANGE_TRACKER_STATUS } from './actions'
 import { getItem, setItem } from '../services/storage';
-// import moment from 'moment';
 
 const initialState = {
   trackerList: getItem('trackerList') || [],
-  // trackerList: [
-  //   {
-  //     id: 'id-0',
-  //     trackerNumber: 1,
-  //     name: 'No name tracker #1',
-  //     creationDate: moment('2020-02-20'),
-  //     duration: moment.duration(0, 'seconds'),
-  //     isActive: true,
-  //   },
-  //   {
-  //     id: 'id-1',
-  //     trackerNumber: 2,
-  //     name: 'No name tracker #2',
-  //     creationDate: moment('2020-02-19'),
-  //     duration: moment.duration(0, 'seconds'),
-  //     isActive: false,
-  //   },
-  //   {
-  //     id: 'id-2',
-  //     trackerNumber: null,
-  //     name: '3 Tracker with long name',
-  //     creationDate: moment('2020-02-18'),
-  //     duration: moment.duration(0, 'seconds'),
-  //     isActive: false,
-  //   },
-  // ]
 };
-
-// function sendData(key, data) {
-
-// }
 
 export default function reduser(state = initialState, action) {
   switch (action.type) {

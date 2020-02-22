@@ -1,13 +1,13 @@
 import './InputCreateTracker.scss';
 import React, { useState } from 'react';
-import { addTracker } from '../../store/actions'
-import store from '../../store'
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions';
 
-function getNextTrackerNumber() {
+function getNextTrackerNumber(trackerList) {
   let nextTrackerNumber = 1;
   let isContains = false;
   do {
-    const tracker = store.getState().trackerList
+    const tracker = trackerList
       .find(({ trackerNumber }) => trackerNumber === nextTrackerNumber);
     if (tracker) {
       nextTrackerNumber++;
@@ -19,31 +19,31 @@ function getNextTrackerNumber() {
   return nextTrackerNumber;
 }
 
-function InputCreateTracker() {
-  const [value, setValue] = useState('');
+function InputCreateTracker(props) {
+  const [trackerName, setTrackerName] = useState('');
 
-  function handleSubmit(event, value) {
+  function handleSubmit(event, trackerName) {
     event.preventDefault();
     let trackerNumber = null;
-    if (!value) {
-      trackerNumber = getNextTrackerNumber();
-      value = `No name tracker #${trackerNumber}`;
+    if (!trackerName) {
+      trackerNumber = getNextTrackerNumber(props.trackerList);
+      trackerName = `No name tracker #${trackerNumber}`;
     }
-    store.dispatch(addTracker(value, trackerNumber));
-    setValue('');
+    props.addTracker(trackerName, trackerNumber);
+    setTrackerName('');
   }
 
   return (
     <form
       className="tracker__creater"
-      onSubmit={(event) => handleSubmit(event, value)}
+      onSubmit={(event) => handleSubmit(event, trackerName)}
     >
       <input
         type="text"
         className="tracker__creater-input"
         placeholder="Enter tracker name"
-        onChange={(event) => setValue(event.target.value)}
-        value={value}
+        onChange={(event) => setTrackerName(event.target.value)}
+        value={trackerName}
       />
       <button className="tracker__creater-btn">
         <i className="material-icons">play_arrow</i>
@@ -52,4 +52,14 @@ function InputCreateTracker() {
   );
 }
 
-export default InputCreateTracker;
+function mapState(state) {
+  return {
+    trackerList: state.trackerList
+  };
+}
+
+const mapDispatch = {
+  addTracker: actions.addTracker
+};
+
+export default connect(mapState, mapDispatch)(InputCreateTracker);

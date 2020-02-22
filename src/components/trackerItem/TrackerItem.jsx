@@ -1,7 +1,7 @@
 import './TrackerItem.scss';
 import React, { useState, useEffect, useRef } from 'react';
-import { deleteTracker, changeTrackerStatus } from '../../store/actions'
-import store from '../../store'
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions';
 
 const ONE_DAY = 1000 * 60 * 60 * 24;
 
@@ -16,35 +16,35 @@ function getTimeToString(duration) {
     seconds < 10 ? '0' + seconds : seconds}`;
 }
 
-function TrackerItem({ id, name, duration, isActive }) {
+function TrackerItem(props) {
+  const { id, name, duration, isActive, changeTrackerStatus, deleteTracker } = props;
   const [timer, setTimer] = useState(getTimeToString(duration));
-  const [status, setStatus] = useState(isActive);
 
   const intervalRef = useRef();
 
   useEffect(() => {
-    if (status) {
+    if (isActive) {
       intervalRef.current = setInterval(() => {
+        // changeTrackerStatus(id, isActive, duration);
         setTimer(getTimeToString(duration.add(1, 's')));
       }, 1000);
     }
 
     return () => {
-      // store.dispatch(changeTrackerStatus(id, status, duration));
+      // changeTrackerStatus(id, !isActive, duration);
       clearInterval(intervalRef.current);
     }
   });
 
-  function handlerClickOnButtonStop() {
-    store.dispatch(changeTrackerStatus(id, !status, duration));
-    setStatus(!status);
+  function handlerClickOnButtonPlayStop() {
+    changeTrackerStatus(id, !isActive, duration);
   }
 
-  const icon = status
+  const icon = isActive
     ? <i className="material-icons">pause_circle_outline</i>
     : <i className="material-icons">play_circle_outline</i>;
 
-  const classActive = status ? ' tracker__item_active' : '';
+  const classActive = isActive ? ' tracker__item_active' : '';
 
   return (
     <li className={`tracker__item${classActive}`}>
@@ -53,13 +53,13 @@ function TrackerItem({ id, name, duration, isActive }) {
         <span className="tracker__item-time">{timer}</span>
         <button
           className="tracker__item-btn"
-          onClick={handlerClickOnButtonStop}
+          onClick={handlerClickOnButtonPlayStop}
         >
           {icon}
         </button>
         <button
           className="tracker__item-btn"
-          onClick={() => store.dispatch(deleteTracker(id))}
+          onClick={() => deleteTracker(id)}
         >
           <i className="material-icons">remove_circle_outline</i>
         </button>
@@ -68,4 +68,15 @@ function TrackerItem({ id, name, duration, isActive }) {
   );
 }
 
-export default TrackerItem;
+// function mapState(state) {
+//   return {
+//     trackerList: state.trackerList
+//   };
+// }
+
+const mapDispatch = {
+  deleteTracker: actions.deleteTracker,
+  changeTrackerStatus: actions.changeTrackerStatus,
+};
+
+export default connect(null, mapDispatch)(TrackerItem);
